@@ -387,6 +387,14 @@
                         <span class="help-block">The name given to the running Docker container (default: {{ plugin_rtmpstreamer_docker_container_default | escape }}).</span>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label">{{ _('Docker Host') }}</label>
+                    <div class="controls">
+                        <input type="text" class="input-block-level"
+                               data-bind="value: settingsViewModel.settings.plugins.rtmpstreamer.docker_server">
+                        <span class="help-block">The URL to the Docker host. Leave empty to use local Unix socket.<br>In case of SSH, please read documentation on GitHub!</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
