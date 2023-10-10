@@ -58,6 +58,7 @@ class rtmpstreamer(octoprint.plugin.BlueprintPlugin,
 
         self.client = None
         self.container = None
+        self.remote_docker = False
         self.image = None
         self.ffmpeg = None
         self.dynamicInfo = None
@@ -213,11 +214,12 @@ class rtmpstreamer(octoprint.plugin.BlueprintPlugin,
 
     def _get_client(self):
         docker_server = self._settings.get(["docker_server"])
-        if _docker_server:
+        if docker_server:
             # If Docker is to be connected through SSH, paramiko module is required
             if docker_server.startswith('ssh://') or (os.environ.get('DOCKER_HOST') and os.environ.get('DOCKER_HOST').startswith('ssh://')):
                 try:
                     import paramiko
+                    self.remote_docker = True
                 except:
                     self._logger.error("Using Docker over SSH requires Paramiko module to be installed")
                     self.client = None
